@@ -71,7 +71,7 @@ var displayQuestion = function () {
     // for loop that loops through each question in an object and creates an li element with the question as the innerhtml
     var answerCounter = 0;
     for (var prop in answers[questionCounter]) {
-        document.getElementById("answersList").innerHTML += "<li id='" + answerCounter + "'' onclick='informResult(" + questionCounter + ", " + answerCounter + ")'>" + answers[questionCounter][prop] + "</li>";
+        document.getElementById("answersList").innerHTML += "<li id='" + answerCounter + "' class='items'' onclick='informResult(" + questionCounter + ", " + answerCounter + ");'>" + answers[questionCounter][prop] + "</li>";
         answerCounter++
     }
 
@@ -94,7 +94,10 @@ var displayQuestion = function () {
 var informResult = function (question, answerId) {
     "use strict";
     
-    document.getElementById("nextButton").setAttribute("onclick", '"displayScore()"')
+    var liArray = document.getElementsByClassName("items");
+    for (var i = 0; i < liArray.length; i++) {
+        liArray[i].setAttribute("onclick", "null");
+    }
     var correct = "You are correct! Try the next question."
     var incorrect = "That answer is incorrect. Please move on to the next question.";
     if (question === 0) {
@@ -135,7 +138,7 @@ var informResult = function (question, answerId) {
     } else {
         alert("That answer is incorrect. Move on to the next question");
     }
-
+    
 
 
 };
