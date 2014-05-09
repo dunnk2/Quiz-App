@@ -1,0 +1,12 @@
+﻿body {
+}
+
+#start {
+    position: relative;
+    left: 625px;
+    top: 300px;
+}
+
+.hide {
+    display: none;
+}
