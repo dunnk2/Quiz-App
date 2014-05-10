@@ -3,13 +3,15 @@
 //an array to hold all the questions
 var answers = [];
 var questionCounter = 0;
+var selectedAnswers = [];
+var correctAnswers = [1, 3, 2, 0, 3];
 var correctCounter = 0;
 
 // right now the questions are listed 
 var theQuestions = ["What color is the sky at noon?", "In what city is the Bastille located?", "What is the most beautiful state?", "What Holiday is celebrated on July 4?", "How do you complete a quiz app?"];
 
 //The possible answers to each question are given in an objects
-//correct answers at position 1, 3, 2, 0 3
+//correct answers at position 1, 3, 2, 0, 3
 
 var q1 = {};
 q1["A"] = "red";
@@ -71,18 +73,20 @@ var first = function () {
 var displayQuestion = function () {
     "use strict";
     //get the element and set inner html to the current question property of the position in the array that currentCounter is at
-    document.getElementById("answersList").innerHTML = ("");
+    document.getElementsByClassName("items").va
     document.getElementById("question").innerHTML = theQuestions[questionCounter];
+
+    var parent = document.getElementById("contentWrapper");
 
     // for loop that loops through each question in an object and creates an li element with the question as the innerhtml
     var answerCounter = 0;
     for (var prop in answers[questionCounter]) {
-        document.getElementById("answersList").innerHTML += "<li id='" + answerCounter + "' class='items'' onclick='informResult(" + questionCounter + ", " + answerCounter + ");'>" + answers[questionCounter][prop] + "</li>";
+        document.getElementById("question").innerHTML += "<div id='" + answerCounter + "' class='items' onclick='selectedAnswers[" + questionCounter + "] = " + answerCounter + ";'>" + answers[questionCounter][prop] + "</div>";
         answerCounter++
     }
 
     //creates "next" button
-    document.getElementById("answersList").innerHTML += "<button id='nextButton'onclick='displayQuestion();'>Click for next question</button>";
+    document.getElementById("question").innerHTML += "<button id='nextButton' onclick='displayQuestion();' >Click for next question</button>";
 
     //changes "next" button to display "see your score" when user has reached last question
     if (questionCounter === theQuestions.length - 1) {
@@ -97,6 +101,7 @@ var displayQuestion = function () {
 };
 
 //This function takes in the question number and the id of the answer the user selected. It alerts the user if the answer is correct or not.
+/*
 var informResult = function (question, answerId) {
     "use strict";
     
@@ -143,12 +148,18 @@ var informResult = function (question, answerId) {
         };
     } 
 };
+*/
 
 // displays the users score 
 var displayScore = function () {
     "use strict";
-
+    for (var i = 0; i < selectedAnswers.length; i++) {
+        if (selectedAnswers[i] === correctAnswers[i]) {
+            correctCounter++;
+        }
+    }
+    
     document.getElementById("question").innerHTML = "You scored " + correctCounter + "/5 questions correctly!";
-    document.getElementById("answersList").innerHTML = ("");
+    //document.getElementById("answersList").innerHTML = ("");
 };
 
