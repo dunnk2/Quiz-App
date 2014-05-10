@@ -13,17 +13,6 @@
     font-size: 20px;
 }
 
-
-/*#header {
-	z-index: 1;
-	position: fixed;
-	width: 97.5%;
-	margin-top: -20px;
-	height: 60px;
-	background-color: #668284;
-	margin-bottom: 10px;
-}*/
-
 #contentWrapper {
     width: 33%;
     height: 66%;
@@ -57,7 +46,18 @@
 }
 
 .items{
-    font-family
+    position: relative;
+    margin-top: 20px;
+    margin-left: 125px;
+
+}
+
+.selected {
+    border: 5px solid black;
+}
+
+.noBorder {
+    border: none;
 }
 
 .hide {
