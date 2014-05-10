@@ -48,11 +48,17 @@ q5["D"] = "By playing flappy bird.";
 //add all the answers to an array
 answers.push(q1, q2, q3, q4, q5);
 
+//content wrapper begins hidden and is opened in the first function
+document.getElementById("contentWrapper").setAttribute("class", "hide");
+
 //function that is called when the start button is clicked.
 var first = function () {
     //hides the begin quiz button
     var beginQuiz = document.getElementById("start");
     beginQuiz.setAttribute("class", "hide");
+
+    //unhide the contentwrapper
+    document.getElementById("contentWrapper").setAttribute("class", "");
 
     //shows the paragraph that asks the question
     document.getElementById("question").setAttribute("class", "");
@@ -135,12 +141,7 @@ var informResult = function (question, answerId) {
         } else {
             alert(incorrect)
         };
-    } else {
-        alert("That answer is incorrect. Move on to the next question");
-    }
-    
-
-
+    } 
 };
 
 // displays the users score 

@@ -65,6 +65,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\backgrounddesk1.jpg" />
+    <Content Include="images\paperbackground1.jpg" />
+    <Content Include="images\paperbackground2.jpg" />
     <Content Include="index.html" />
     <Content Include="Script.js" />
     <Content Include="StyleSheet.css" />

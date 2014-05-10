@@ -1,10 +1,63 @@
 ﻿body {
+    background-image: url(images/backgrounddesk1.jpg);
 }
 
 #start {
-    position: relative;
-    left: 625px;
-    top: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    font-size: 20px;
+}
+
+
+/*#header {
+	z-index: 1;
+	position: fixed;
+	width: 97.5%;
+	margin-top: -20px;
+	height: 60px;
+	background-color: #668284;
+	margin-bottom: 10px;
+}*/
+
+#contentWrapper {
+    width: 33%;
+    height: 66%;
+    border: 2px solid black;
+    position: absolute;
+    left: 33%;
+    top: 25%;
+    background-image: url(images/paperbackground2.jpg);
+}
+
+#question {
+    position: absolute;
+    left: 45%;
+    top: 2%;
+    width: 300px;
+    heigth: 100px;
+    margin-top: 0px;
+    margin-left: -100px;
+    font-size: 20px;
+    text-align:left;
+}
+
+#answersList {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    heigth: 100px;
+    margin-top: -75px;
+    margin-left: -100px;
+}
+
+.items{
+    font-family
 }
 
 .hide {
