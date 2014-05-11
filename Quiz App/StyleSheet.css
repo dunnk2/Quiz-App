@@ -36,6 +36,12 @@
     font-family: Impact;
 }
 
+.finalResult:hover {
+    transition-property: font-size;
+    transition-duration: 2s;
+    font-size: 30px;
+}
+
 .items{
     position: relative;
     top: 26px;
@@ -55,6 +61,7 @@
     transition-property: font-size;
     font-size: 25px;
     color: white;
+    cursor: pointer;
 }
 
 .selected {

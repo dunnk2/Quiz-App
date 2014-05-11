@@ -5,8 +5,8 @@
 - add css transitions. 
 finished - make everything centered
 finished - add progress bar
-- make a bunch of different quizzes and have a choose 
-- change the mouse to a pointer when the user hovers over questions or answers
+- make a bunch of different quizzes and have them choose
+finished - change the mouse to a pointer when the user hovers over questions or answers
 
 */
 
@@ -85,8 +85,7 @@ var first = function () {
 //function that displays each question
 var displayQuestion = function () {
     "use strict";
-    //get the element and set inner html to the current question property of the position in the array that currentCounter is at
-    //document.getElementsByClassName("items").
+
     document.getElementById("question").innerHTML = theQuestions[questionCounter];
 
     // for loop that loops through each question in an object and creates an li element with the question as the innerhtml
