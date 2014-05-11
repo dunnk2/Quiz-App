@@ -16,7 +16,7 @@
 #contentWrapper {
     width: 33%;
     height: 66%;
-    border: 2px solid black;
+    border: 10px solid #2B1800;
     position: absolute;
     left: 33%;
     top: 25%;
@@ -24,47 +24,67 @@
 }
 
 #question {
-    position: absolute;
-    left: 45%;
-    top: 2%;
-    width: 400px;
+    position: relative;
+    left: 120px;
+    top: 65px;
+    width: 452px;
     heigth: 100px;
     margin-top: 0px;
     margin-left: -120px;
     font-size: 20px;
-    text-align:left;
+    text-align:center;
 }
-
+/*
+#question:hover {
+    background-color: black;
+    color: white;
+}
+*/
 .items{
     position: relative;
-    top: 20px;
-    left: -100px;
-    margin-top: 10px;
+    top: 26px;
+    left: -13px;
+    margin-top: 5.5px;
     margin-left: 10px;
     text-align: center;
+    width: 454px;
     
 }
 
 .items:hover {
-    background-color: black;
+    background-color: #2B1800;
     color: white;
 }
 
+.selected {
+    border: 4px solid #2B1800;
+}
+
 #nextButton {
-    width: 200px;
+    position: absolute;
+    width: 50%;
+    height: 157px;
+    text-align: center;
+    right: 0px;
+    left: 225px;
+    top: 222px;
+    margin-left: 0px;
+    margin-right: 0px;
 
 }
 
 #previousButton {
-    width: 200px;
-    position: relative;
+    position: absolute;
+    width: 49.9%;
+    height: 157px;
+    left: 60px;
+    top: 139px;
     margin-left: -60px;
-    margin-top: 90px;
+    margin-top: 83px;
+    text-align: center;
 }
 
-.selected {
-    border: 5px solid black;
-}
+
 
 
 .hide {

@@ -100,8 +100,11 @@ var displayQuestion = function () {
             document.getElementById(selectedAnswers[questionCounter]).className += " selected";
         }
     }
-    //creates previous button
-    document.getElementById("question").innerHTML += "<button id='previousButton' onclick=' backOne(); displayQuestion();'>Previous</button>"; 
+    //creates previous button and disables it until the user has reached the second question.
+    document.getElementById("question").innerHTML += "<button id='previousButton' onclick=' backOne(); displayQuestion();'>Previous</button>";
+    if (questionCounter === 0) {
+        document.getElementById("previousButton").setAttribute("onclick", "");
+    }
 
     //creates "next" button
     document.getElementById("question").innerHTML += "<button id='nextButton' onclick='displayQuestion();' >Next</button>";
