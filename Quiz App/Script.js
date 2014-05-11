@@ -3,8 +3,8 @@
 /* Features to add:
 - show answers visually at end of quiz, with 5 small pageviews and the users answer marked in red and the correct answer marked in green.
 - add css transitions. 
-- make everything centered
-- add progress bar
+finished - make everything centered
+finished - add progress bar
 - make a bunch of different quizzes and have a choose 
 - change the mouse to a pointer when the user hovers over questions or answers
 
