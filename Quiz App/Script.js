@@ -1,10 +1,21 @@
 "use strict"
 
+/* Features to add:
+- show answers visually at end of quiz, with 5 small pageviews and the users answer marked in red and the correct answer marked in green.
+- add css transitions. 
+- make everything centered
+- add progress bar
+- make a bunch of different quizzes and have a choose 
+- change the mouse to a pointer when the user hovers over questions or answers
+
+*/
+
+
 //an array to hold all the questions
 var answers = [];
 var questionCounter = 0;
 var selectedAnswers = [];
-var correctAnswers = [1, 3, 2, 0, 3];
+var correctAnswers = [1, 3, 2, 0, 2];
 var correctCounter = 0;
 
 // right now the questions are listed 
@@ -76,9 +87,6 @@ var displayQuestion = function () {
     //document.getElementsByClassName("items").
     document.getElementById("question").innerHTML = theQuestions[questionCounter];
 
-    
-
-
     // for loop that loops through each question in an object and creates an li element with the question as the innerhtml
     var answerCounter = 0;
     for (var prop in answers[questionCounter]) {
@@ -87,7 +95,7 @@ var displayQuestion = function () {
     }
 
     //check if the question has been answered before. If it has, give the border class to the previously selected ID
-    if (questionCounter >= 1) {
+    if (questionCounter >= 0) {
         if (selectedAnswers[questionCounter] !== undefined) {
             document.getElementById(selectedAnswers[questionCounter]).className += " selected";
         }
@@ -117,8 +125,9 @@ var backOne = function () {
 
 //makes only the clicked item selected
 var giveBorder = function (id, question) {
-
+    "use strict";
     var liItems = document.getElementsByClassName("items");
+
     for (var i = 0; i < liItems.length; i++) {
         liItems[i].className = "items";
     }
@@ -134,8 +143,12 @@ var displayScore = function () {
             correctCounter++;
         }
     }
+
     
     document.getElementById("question").innerHTML = "You scored " + correctCounter + "/5 questions correctly!";
-    //document.getElementById("answersList").innerHTML = ("");
+    if (correctCounter === 5) {
+        document.getElementById("question").innerHTML = "<img src='images/swag.gif' />";
+    }
+    
 };
 

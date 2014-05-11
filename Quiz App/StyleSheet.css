@@ -30,7 +30,7 @@
     width: 400px;
     heigth: 100px;
     margin-top: 0px;
-    margin-left: -100px;
+    margin-left: -120px;
     font-size: 20px;
     text-align:left;
 }
@@ -38,14 +38,17 @@
 .items{
     position: relative;
     top: 20px;
-    left: -80px;
+    left: -100px;
     margin-top: 10px;
     margin-left: 10px;
     text-align: center;
-    background-color: blue;
+    
 }
 
-.items:hover {background-color: yellow;}
+.items:hover {
+    background-color: black;
+    color: white;
+}
 
 #nextButton {
     width: 200px;
@@ -61,10 +64,6 @@
 
 .selected {
     border: 5px solid black;
-}
-
-.noBorder {
-    border: none;
 }
 
 
