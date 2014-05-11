@@ -34,12 +34,7 @@
     font-size: 20px;
     text-align:center;
 }
-/*
-#question:hover {
-    background-color: black;
-    color: white;
-}
-*/
+
 .items{
     position: relative;
     top: 26px;
@@ -58,6 +53,12 @@
 
 .selected {
     border: 4px solid #2B1800;
+}
+
+#progressBar {
+    position: absolute;
+    top: 200px;
+    left: 80px;
 }
 
 #nextButton {
@@ -84,7 +85,13 @@
     text-align: center;
 }
 
-
+#retakeButton {
+    position: absolute;
+    top: 260px;
+    left: 100px;
+    width: 250px;
+    height: 100px;
+}
 
 
 .hide {

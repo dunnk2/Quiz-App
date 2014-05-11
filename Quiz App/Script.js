@@ -76,6 +76,8 @@ var first = function () {
     //shows the paragraph that asks the question
     document.getElementById("question").setAttribute("class", "");
 
+
+
     //calls the question function that will display the answers
     displayQuestion();
 };
@@ -100,6 +102,10 @@ var displayQuestion = function () {
             document.getElementById(selectedAnswers[questionCounter]).className += " selected";
         }
     }
+
+    //Add a progress bar
+    document.getElementById("question").innerHTML += "<progress id='progressBar' value='" + questionCounter + "' max='5'></progress>";
+
     //creates previous button and disables it until the user has reached the second question.
     document.getElementById("question").innerHTML += "<button id='previousButton' onclick=' backOne(); displayQuestion();'>Previous</button>";
     if (questionCounter === 0) {
@@ -146,12 +152,34 @@ var displayScore = function () {
             correctCounter++;
         }
     }
-
     
     document.getElementById("question").innerHTML = "You scored " + correctCounter + "/5 questions correctly!";
-    if (correctCounter === 5) {
-        document.getElementById("question").innerHTML = "<img src='images/swag.gif' />";
-    }
     
+    switch (correctCounter) {
+        case 0:
+            document.getElementById("question").innerHTML += "<img id='resultImage' src='images/0.gif' />";
+            break; 
+        case 1:
+            document.getElementById("question").innerHTML += "<img id='resultImage' src='images/1.gif' />";
+            break;
+        case 2:
+            document.getElementById("question").innerHTML += "<img id='resultImage' src='images/2.gif' />";
+            break;
+        case 3:
+            document.getElementById("question").innerHTML += "<img id='resultImage' src='images/3.gif' />";
+            break;
+        case 4:
+            document.getElementById("question").innerHTML += "<img id='resultImage' src='images/4.gif' />";
+            break;
+        case 5:
+            document.getElementById("question").innerHTML += "<img id='resultImage' src='images/5.gif' />";
+            break;
+    }
+
+    document.getElementById("question").innerHTML += "<button id='retakeButton' onclick='displayQuestion();'>Retake the quiz</button>";
+    questionCounter = -1;
+    selectedAnswers = [];
+    correctCounter = 0;
+
 };
 

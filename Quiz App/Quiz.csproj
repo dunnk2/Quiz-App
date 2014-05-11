@@ -65,10 +65,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\0.gif" />
+    <Content Include="images\1.gif" />
+    <Content Include="images\2.gif" />
+    <Content Include="images\3.gif" />
+    <Content Include="images\4.gif" />
+    <Content Include="images\5.gif" />
     <Content Include="images\backgrounddesk1.jpg" />
-    <Content Include="images\paperbackground1.jpg" />
     <Content Include="images\paperbackground2.jpg" />
-    <Content Include="images\swag.gif" />
     <Content Include="index.html" />
     <Content Include="Script.js" />
     <Content Include="StyleSheet.css" />
