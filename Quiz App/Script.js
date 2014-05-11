@@ -76,12 +76,8 @@ var displayQuestion = function () {
     //document.getElementsByClassName("items").
     document.getElementById("question").innerHTML = theQuestions[questionCounter];
 
-    //check if the question has been answered before. If it has, give the border class to the previously selected ID
-    if (questionCounter >= 1) {
-        if (selectedAnswers[questionCounter] !== undefined) {
-            document.getElementById(selectedAnswers[questionCounter]).className += " selected";
-        }
-    }
+    
+
 
     // for loop that loops through each question in an object and creates an li element with the question as the innerhtml
     var answerCounter = 0;
@@ -90,6 +86,12 @@ var displayQuestion = function () {
         answerCounter++;
     }
 
+    //check if the question has been answered before. If it has, give the border class to the previously selected ID
+    if (questionCounter >= 1) {
+        if (selectedAnswers[questionCounter] !== undefined) {
+            document.getElementById(selectedAnswers[questionCounter]).className += " selected";
+        }
+    }
     //creates previous button
     document.getElementById("question").innerHTML += "<button id='previousButton' onclick=' backOne(); displayQuestion();'>Previous</button>"; 
 
