@@ -73,82 +73,56 @@ var first = function () {
 var displayQuestion = function () {
     "use strict";
     //get the element and set inner html to the current question property of the position in the array that currentCounter is at
-    document.getElementsByClassName("items").va
+    //document.getElementsByClassName("items").
     document.getElementById("question").innerHTML = theQuestions[questionCounter];
 
-    var parent = document.getElementById("contentWrapper");
+    //check if the question has been answered before. If it has, give the border class to the previously selected ID
+    if (questionCounter >= 1) {
+        if (selectedAnswers[questionCounter] !== undefined) {
+            document.getElementById(selectedAnswers[questionCounter]).className += " selected";
+        }
+    }
 
     // for loop that loops through each question in an object and creates an li element with the question as the innerhtml
     var answerCounter = 0;
     for (var prop in answers[questionCounter]) {
-        document.getElementById("question").innerHTML += "<div id='" + answerCounter + "' class='items' onclick='selectedAnswers[" + questionCounter + "] = " + answerCounter + ";'>" + answers[questionCounter][prop] + "</div>";
-        answerCounter++
+        document.getElementById("question").innerHTML += "<div id='" + answerCounter + "' class='items' onclick='selectedAnswers[" + questionCounter + "] = " + answerCounter + "; giveBorder(" + answerCounter + " ," + questionCounter + ");'>" + answers[questionCounter][prop] + "</div>";
+        answerCounter++;
     }
 
+    //creates previous button
+    document.getElementById("question").innerHTML += "<button id='previousButton' onclick=' backOne(); displayQuestion();'>Previous</button>"; 
+
     //creates "next" button
-    document.getElementById("question").innerHTML += "<button id='nextButton' onclick='displayQuestion();' >Click for next question</button>";
+    document.getElementById("question").innerHTML += "<button id='nextButton' onclick='displayQuestion();' >Next</button>";
+    
 
     //changes "next" button to display "see your score" when user has reached last question
     if (questionCounter === theQuestions.length - 1) {
         document.getElementById("nextButton").innerHTML = "See your score!";
     }
 
-    //calls a display score function  if the user has reached the end of the questions
+    //calls a display score function if the user has reached the end of the questions
     if (questionCounter === theQuestions.length) {
         displayScore();
     }
     questionCounter++;
 };
 
-//This function takes in the question number and the id of the answer the user selected. It alerts the user if the answer is correct or not.
-/*
-var informResult = function (question, answerId) {
-    "use strict";
-    
-    var liArray = document.getElementsByClassName("items");
-    for (var i = 0; i < liArray.length; i++) {
-        liArray[i].setAttribute("onclick", "null");
-    }
-    var correct = "You are correct! Try the next question."
-    var incorrect = "That answer is incorrect. Please move on to the next question.";
-    if (question === 0) {
-        if (answerId === 1) {
-            alert(correct);
-            correctCounter++;
-        } else {
-            alert(incorrect);
-        }
-    } else if (question === 1) {
-        if (answerId === 3)  { 
-            alert(correct);
-            correctCounter++;
-        } else {
-            alert(incorrect);
-        }
-    } else if (question === 2) {
-        if (answerId === 2)  { 
-            alert(correct);
-            correctCounter++;
-        } else {
-            alert(incorrect);
-        }
-    } else if (question === 3) {
-        if (answerId === 0)  { 
-            alert(correct);
-            correctCounter++;
-        } else {
-            alert(incorrect);
-        }
-    } else if (question === 4) {
-        if (answerId === 2) {
-            alert(correct);
-            correctCounter++;
-        } else {
-            alert(incorrect)
-        };
-    } 
+var backOne = function () {
+    questionCounter = questionCounter - 2;
 };
-*/
+
+//makes only the clicked item selected
+var giveBorder = function (id, question) {
+
+    var liItems = document.getElementsByClassName("items");
+    for (var i = 0; i < liItems.length; i++) {
+        liItems[i].className = "items";
+    }
+    document.getElementById(id).className += " selected";
+};
+
 
 // displays the users score 
 var displayScore = function () {
