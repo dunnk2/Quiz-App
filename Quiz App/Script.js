@@ -12,54 +12,64 @@ finished - change the mouse to a pointer when the user hovers over questions or 
 
 
 //an array to hold all the questions
-var answers = [];
+var questions = [];
 var questionCounter = 0;
 var selectedAnswers = [];
 var correctAnswers = [1, 3, 2, 0, 2];
 var correctCounter = 0;
 
-// right now the questions are listed 
-var theQuestions = ["What color is the sky at noon?", "In what city is the Bastille located?", "What is the most beautiful state?", "What Holiday is celebrated on July 4?", "How do you complete a quiz app?"];
+var protoQuestion = {
+    Author: "Kyle",
+    changeQuestion: function (newQuestionText) {
+        this.Question = newQuestionText;
+    }
+}
 
-//The possible answers to each question are given in an objects
+
+//The possible questions to each question are given in an objects
 //correct answers at position 1, 3, 2, 0, 3
 
-var q1 = {};
-q1["A"] = "red";
-q1["B"] = "blue";
-q1["C"] = "green";
-q1["D"] = "yellow";
+var q1 = Object.create(protoQuestion);
+q1["Question"] = "What color is the sky at noon?";
+q1["ans1"] = "red";
+q1["ans2"] = "blue";
+q1["ans3"] = "green";
+q1["ans4"] = "yellow";
 
 
-var q2 = {};
-q2["A"] = "London";
-q2["B"] = "Moscow";
-q2["C"] = "Seoul";
-q2["D"] = "Paris";
+var q2 = Object.create(protoQuestion);
+q2["Question"] = "In what city is the Bastille located?";
+q2["ans1"] = "London";
+q2["ans2"] = "Moscow";
+q2["ans3"] = "Seoul";
+q2["ans4"] = "Paris";
 
 
-var q3 = {};
-q3["A"] = "Maryland";
-q3["B"] = "New Mexico";
-q3["C"] = "Washington";
-q3["D"] = "Kansas";
+var q3 = Object.create(protoQuestion);
+q3["Question"] = "What is the most beautiful state?";
+q3["ans1"] = "Maryland";
+q3["ans2"] = "New Mexico";
+q3["ans3"] = "Washington";
+q3["ans4"] = "Kansas";
 
 
-var q4 = {};
-q4["A"] = "Independence Day";
-q4["B"] = "Halloween";
-q4["C"] = "Easter";
-q4["D"] = "Thanksgiving";
+var q4 = Object.create(protoQuestion);
+q4["Question"] = "What Holiday is celebrated on July 4?"
+q4["ans1"] = "Independence Day";
+q4["ans2"] = "Halloween";
+q4["ans3"] = "Easter";
+q4["ans4"] = "Thanksgiving";
 
 
-var q5 = {};
-q5["A"] = "With great ease.";
-q5["B"] = "By using stack overflow.";
-q5["C"] = "Through pain and suffering.";
-q5["D"] = "By playing flappy bird.";
+var q5 = Object.create(protoQuestion);
+q5["Question"] = "How do you complete a quiz app?"
+q5["ans1"] = "With great ease.";
+q5["ans2"] = "By using stack overflow.";
+q5["ans3"] = "Through pain and suffering.";
+q5["ans4"] = "By playing flappy bird.";
 
 //add all the answers to an array
-answers.push(q1, q2, q3, q4, q5);
+questions.push(q1, q2, q3, q4, q5);
 
 //content wrapper begins hidden and is opened in the first function
 document.getElementById("contentWrapper").setAttribute("class", "hide");
@@ -78,7 +88,7 @@ var first = function () {
 
 
 
-    //calls the question function that will display the answers
+    //calls the question function that will display the questions
     displayQuestion();
 };
 
@@ -86,13 +96,15 @@ var first = function () {
 var displayQuestion = function () {
     "use strict";
 
-    document.getElementById("question").innerHTML = theQuestions[questionCounter];
+    document.getElementById("question").innerHTML = questions[questionCounter]["Question"];
 
     // for loop that loops through each question in an object and creates an li element with the question as the innerhtml
-    var answerCounter = 0;
-    for (var prop in answers[questionCounter]) {
-        document.getElementById("question").innerHTML += "<div id='" + answerCounter + "' class='items' onclick='selectedAnswers[" + questionCounter + "] = " + answerCounter + "; giveBorder(" + answerCounter + " ," + questionCounter + ");'>" + answers[questionCounter][prop] + "</div>";
-        answerCounter++;
+
+
+    document.getElementById("question").innerHTML += "<div>by "+ questions[questionCounter]["Author"] +" </div>";
+
+    for (var i = 0; i < 4; i++) {
+        document.getElementById("question").innerHTML += "<div id='" + i + "' class='items' onclick='selectedAnswers[" + questionCounter + "] = " + i + "; giveBorder(" + i + " ," + questionCounter + ");'>" + questions[questionCounter]["ans" + (i+1)] + "</div>";
     }
 
     //check if the question has been answered before. If it has, give the border class to the previously selected ID
@@ -116,12 +128,12 @@ var displayQuestion = function () {
     
 
     //changes "next" button to display "see your score" when user has reached last question
-    if (questionCounter === theQuestions.length - 1) {
+    if (questionCounter === questions.length - 1) {
         document.getElementById("nextButton").innerHTML = "See your score!";
     }
 
     //calls a display score function if the user has reached the end of the questions
-    if (questionCounter === theQuestions.length) {
+    if (questionCounter === questions.length) {
         displayScore();
     }
     questionCounter++;
