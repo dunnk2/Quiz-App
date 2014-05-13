@@ -13,6 +13,7 @@
     font-size: 20px;
 }
 
+
 #contentWrapper {
     width: 33%;
     height: 66%;
@@ -26,10 +27,11 @@
 #question {
     position: relative;
     left: 120px;
-    top: 37px;
+    top: 5px;
     width: 452px;
     heigth: 100px;
     margin-top: 0px;
+    margin-bottom: 0px;
     margin-left: -120px;
     font-size: 20px;
     text-align:center;
@@ -44,7 +46,7 @@
 
 .items{
     position: relative;
-    top: 26px;
+    top: -20px;
     left: -13px;
     margin-top: 5.5px;
     margin-left: 10px;
@@ -70,7 +72,7 @@
 
 #progressBar {
     position: absolute;
-    top: 193px;
+    top: 220px;
     left: 85px;
     height: 25px;
 }
@@ -82,7 +84,7 @@
     text-align: center;
     right: 0px;
     left: 225px;
-    top: 250px;
+    top: 282px;
     margin-left: 0px;
     margin-right: 0px;
 
@@ -93,10 +95,15 @@
     width: 49.9%;
     height: 157px;
     left: 60px;
-    top: 167px;
+    top: 199px;
     margin-left: -60px;
     margin-top: 83px;
     text-align: center;
+}
+
+#questionAuthor {
+    position: relative;
+    top: -20px;
 }
 
 #retakeButton {

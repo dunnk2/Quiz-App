@@ -1,8 +1,9 @@
 "use strict"
 
 /* Features to add:
+finished- set correct answers as a property 
 - show answers visually at end of quiz, with 5 small pageviews and the users answer marked in red and the correct answer marked in green.
-- add css transitions. 
+finished- add css transitions. 
 finished - make everything centered
 finished - add progress bar
 - make a bunch of different quizzes and have them choose
@@ -11,58 +12,75 @@ finished - change the mouse to a pointer when the user hovers over questions or 
 */
 
 
-//an array to hold all the questions
-var answers = [];
+//global variables
+
 var questionCounter = 0;
-var selectedAnswers = [];
-var correctAnswers = [1, 3, 2, 0, 2];
 var correctCounter = 0;
 
-// right now the questions are listed 
-var theQuestions = ["What color is the sky at noon?", "In what city is the Bastille located?", "What is the most beautiful state?", "What Holiday is celebrated on July 4?", "How do you complete a quiz app?"];
+//var theQuestions = ["What color is the sky at noon?", "In what city is the Bastille located?", "What is the most beautiful state?", "What Holiday is celebrated on July 4?", "How do you complete a quiz app?"];
+var questions = [];
+var selectedAnswers = [];
+var correctAnswers = [];
 
-//The possible answers to each question are given in an objects
-//correct answers at position 1, 3, 2, 0, 3
+var protoQuestion = {
+    author: "Kyle",
+    changeQuestion: function () {
+        this["question"] = "testing the change";
+    }
+};
 
-var q1 = {};
-q1["A"] = "red";
-q1["B"] = "blue";
-q1["C"] = "green";
-q1["D"] = "yellow";
+var QuestionConstructor = function (questionText, A, B, C, D, correctAnswer) {
+    var question = questionText;
+    var first = A;
+    var second = B;
+    var third = C;
+    var fourth = D;
+    var correct = correctAnswer;
 
-
-var q2 = {};
-q2["A"] = "London";
-q2["B"] = "Moscow";
-q2["C"] = "Seoul";
-q2["D"] = "Paris";
-
-
-var q3 = {};
-q3["A"] = "Maryland";
-q3["B"] = "New Mexico";
-q3["C"] = "Washington";
-q3["D"] = "Kansas";
+    correctAnswers.push(correct);
 
 
-var q4 = {};
-q4["A"] = "Independence Day";
-q4["B"] = "Halloween";
-q4["C"] = "Easter";
-q4["D"] = "Thanksgiving";
+    this["getQuestion"] = function() {
+        return question;
+    };
+    this["getAns0"] = function() {
+        return first;
+    };
+    this["getAns1"] = function() {
+        return second;
+    };
+    this["getAns2"] = function() {
+        return third;
+    };
+    this["getAns3"] = function() {
+        return fourth;
+    };
+
+};
+
+QuestionConstructor["prototype"] = protoQuestion;
+QuestionConstructor["prototype"]["changeQuestion"] = function (newQuestionText) {
+    this.question = newQuestionText;
+};
 
 
-var q5 = {};
-q5["A"] = "With great ease.";
-q5["B"] = "By using stack overflow.";
-q5["C"] = "Through pain and suffering.";
-q5["D"] = "By playing flappy bird.";
 
-//add all the answers to an array
-answers.push(q1, q2, q3, q4, q5);
+var q1 = new QuestionConstructor("What color is the sky?", "red", "blue", "green", "yellow", 2);
+var q2 = new QuestionConstructor("Where is the Bastille located?", "London", "Moscow", "Seoul", "Paris", 4);
+var q3 = new QuestionConstructor("What is the most beautiful state?", "New Jersey", "Virginia", "Washington", "Colorado", 3);
+var q4 = new QuestionConstructor("What Holiday is celebrated July 4?", "Independence Day", "Halloween", "Easter", "Thanksgiving", 1);
+var q5 = new QuestionConstructor("How do you complete a quiz app?", "With great ease", "By using stack overflow", "Through pain and suffering", "By playing flappy bird", 3);
+var q6 = new QuestionConstructor("What's the best football team?", "Oregon", "San Francisco", "Seattle Seahawks", "Atlanta Falcons", 3);
+
+
+//add all the questions to an array
+questions.push(q1, q2, q3, q4, q5, q6);
 
 //content wrapper begins hidden and is opened in the first function
 document.getElementById("contentWrapper").setAttribute("class", "hide");
+
+//function that changes the question if called
+questions[0].changeQuestion("test");
 
 //function that is called when the start button is clicked.
 var first = function () {
@@ -76,34 +94,41 @@ var first = function () {
     //shows the paragraph that asks the question
     document.getElementById("question").setAttribute("class", "");
 
-
-
     //calls the question function that will display the answers
     displayQuestion();
 };
+
+
 
 //function that displays each question
 var displayQuestion = function () {
     "use strict";
 
-    document.getElementById("question").innerHTML = theQuestions[questionCounter];
+    if (questionCounter === questions.length) {
+        displayScore();
+    }
 
+    //displays the correct question
+    document.getElementById("question").innerHTML = questions[questionCounter]['getQuestion']() + "<h6 id='questionAuthor'> By " + questions[questionCounter]["author"] + "</h6>";
     // for loop that loops through each question in an object and creates an li element with the question as the innerhtml
     var answerCounter = 0;
-    for (var prop in answers[questionCounter]) {
-        document.getElementById("question").innerHTML += "<div id='" + answerCounter + "' class='items' onclick='selectedAnswers[" + questionCounter + "] = " + answerCounter + "; giveBorder(" + answerCounter + " ," + questionCounter + ");'>" + answers[questionCounter][prop] + "</div>";
-        answerCounter++;
+    for (var prop in questions[questionCounter]) {
+        if (questions[questionCounter].hasOwnProperty(prop)) {
+            if (prop.charAt(3) === "A" && prop.charAt(4) === "n") {
+                document.getElementById("question").innerHTML += "<div id='" + answerCounter + "' class='items' onclick='selectedAnswers[" + questionCounter + "] = " + answerCounter + "; giveBorder(" + answerCounter + " ," + questionCounter + ");'>" + questions[questionCounter]['getAns' + answerCounter]() + "</div>";
+                answerCounter++;
+            }
+        }
+        
     }
 
     //check if the question has been answered before. If it has, give the border class to the previously selected ID
-    if (questionCounter >= 0) {
-        if (selectedAnswers[questionCounter] !== undefined) {
-            document.getElementById(selectedAnswers[questionCounter]).className += " selected";
-        }
+    if (selectedAnswers[questionCounter] !== undefined) {
+        document.getElementById(selectedAnswers[questionCounter]).className += " selected";
     }
 
     //Add a progress bar
-    document.getElementById("question").innerHTML += "<progress id='progressBar' value='" + questionCounter + "' max='5'></progress>";
+    document.getElementById("question").innerHTML += "<progress id='progressBar' value='" + questionCounter + "' max='" + questions.length + "'></progress>";
 
     //creates previous button and disables it until the user has reached the second question.
     document.getElementById("question").innerHTML += "<button id='previousButton' onclick=' backOne(); displayQuestion();'>Previous</button>";
@@ -113,26 +138,28 @@ var displayQuestion = function () {
 
     //creates "next" button
     document.getElementById("question").innerHTML += "<button id='nextButton' onclick='displayQuestion();' >Next</button>";
-    
 
     //changes "next" button to display "see your score" when user has reached last question
-    if (questionCounter === theQuestions.length - 1) {
+    if (questionCounter === questions.length - 1) {
         document.getElementById("nextButton").innerHTML = "See your score!";
+        document.getElementById("nextButton").setAttribute("onclick", "displayScore()");
     }
 
     //calls a display score function if the user has reached the end of the questions
-    if (questionCounter === theQuestions.length) {
-        displayScore();
-    }
+    //if (questionCounter === questions.length) {
+    //    displayScore();
+    //}
     questionCounter++;
 };
+
+
 
 var backOne = function () {
     questionCounter = questionCounter - 2;
 };
 
 //makes only the clicked item selected
-var giveBorder = function (id, question) {
+var giveBorder = function (id) {
     "use strict";
     var liItems = document.getElementsByClassName("items");
 
@@ -147,12 +174,12 @@ var giveBorder = function (id, question) {
 var displayScore = function () {
     "use strict";
     for (var i = 0; i < selectedAnswers.length; i++) {
-        if (selectedAnswers[i] === correctAnswers[i]) {
+        if (selectedAnswers[i] === (correctAnswers[i] - 1)) {
             correctCounter++;
         }
     }
     
-    document.getElementById("question").innerHTML = "You scored " + correctCounter + "/5 questions correctly!";
+    document.getElementById("question").innerHTML = "You scored " + correctCounter + "/"+ correctAnswers.length +" questions correctly!";
     
     switch (correctCounter) {
         case 0:
@@ -176,7 +203,7 @@ var displayScore = function () {
     }
 
     document.getElementById("question").innerHTML += "<button id='retakeButton' onclick='displayQuestion();'>Retake the quiz</button>";
-    questionCounter = -1;
+    questionCounter = 0;
     selectedAnswers = [];
     correctCounter = 0;
 
