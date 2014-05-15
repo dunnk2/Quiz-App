@@ -170,12 +170,16 @@ var finishQuiz = function () {
     document.getElementById("createQuiz").className = "";
     quizzes.push(userCreatedQuestions);
 };
-//function that displays each question
+//function that displays each question. 
 var displayQuestion = function (quizNumber) {
     "use strict";
     if (quizNumber !== undefined) {
-        var numOfQuiz = quizNumber;
+        numOfQuiz = quizNumber;
+    } else {
+        numOfQuiz = 0;
     }
+
+
     if (questionCounter === quizzes[numOfQuiz].length) {
         displayScore();
     }
