@@ -136,19 +136,20 @@ var createQuestion = function () {
     document.getElementById("question").innerHTML = "";
     document.getElementById("question").innerHTML +=
         "<div id='createQuestionHead'>Create Question " + (createQuestionCounter + 1) + "</div>"
-        + "<br />" + "<p class='creators' id='newQuestion'> Question: " + "<textarea name='newQ' cols='20' rows='4'/>Enter your question</textarea>" + "</p>"
-        + "<br />" + "<p class='creators' id='userAns1'> Answer 1: " + "<input type='text' name='ans1' size='15' maxlength='30' />" + "</p>"
-        + "<br />" + "<p class='creators' id='userAns2'> Answer 2: " + "<input type='text' name='ans2' size='15' maxlength='30' />" + "</p>"
-        + "<br />" + "<p class='creators' id='userAns3'> Answer 3: " + "<input type='text' name='ans3' size='15' maxlength='30' />" + "</p>"
-        + "<br />" + "<p class='creators' id='userAns4'> Answer 4" + "<input type='text' name='ans4' size='15' maxlength='30' />" + "</p>"
-        + "<br />" + "<p class='creators' id='newCorrect'> Correct Answer" + "<input type='text' name='ans4' size='15' maxlength='30' />" + "</p>"
+        + "<br />" + "<p class='creators' > Question: " + "<textarea id='newQuestion' name='newQ' cols='20' rows='4'/>Enter your question</textarea>" + "</p>"
+        + "<br />" + "<p class='creators'> Answer 1: " + "<input id='userAns1' type='text' name='ans1' size='15' maxlength='30' />" + "</p>"
+        + "<br />" + "<p class='creators'> Answer 2: " + "<input id='userAns2' type='text' name='ans2' size='15' maxlength='30' />" + "</p>"
+        + "<br />" + "<p class='creators'> Answer 3: " + "<input id='userAns3' type='text' name='ans3' size='15' maxlength='30' />" + "</p>"
+        + "<br />" + "<p class='creators'> Answer 4" + "<input id='userAns4' type='text' name='ans4' size='15' maxlength='30' />" + "</p>"
+        + "<br />" + "<p class='creators'> Correct Answer" + "<input id='newCorrect' type='text' name='ans4' size='15' maxlength='30' />" + "</p>"
         + "<button id='nextOne' onclick='createNext();'>Create next question</button>"
         + "<button id='finishQuiz' onclick='finishQuiz();'>Finish your quiz</button>";
 
 };
 
 //this function needs to grab the values from the array and store them in an object which will get pushed into an array
-var createNext = function() {
+var createNext = function () {
+
     var userQuestion = document.getElementById("newQuestion").value;
     var answer1 = document.getElementById("userAns1").value;
     var answer2 = document.getElementById("userAns2").value;
@@ -173,7 +174,7 @@ var finishQuiz = function () {
 var displayQuestion = function (quizNumber) {
     "use strict";
     if (quizNumber !== undefined) {
-        numOfQuiz = quizNumber;
+        var numOfQuiz = quizNumber;
     }
     if (questionCounter === quizzes[numOfQuiz].length) {
         displayScore();
